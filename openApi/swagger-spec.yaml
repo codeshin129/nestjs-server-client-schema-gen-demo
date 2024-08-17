@@ -1,0 +1,76 @@
+openapi: 3.0.0
+paths:
+  /users:
+    get:
+      operationId: AppController_getUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+    post:
+      operationId: AppController_createUser
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+info:
+  title: Users example
+  description: The users API description
+  version: '1.0'
+  contact: {}
+tags:
+  - name: user
+    description: ''
+servers: []
+components:
+  schemas:
+    Config:
+      type: object
+      properties:
+        isAdmin:
+          type: boolean
+        serverSideName:
+          type: string
+          maxLength: 50
+      required:
+        - isAdmin
+    CreateUserDto:
+      type: object
+      properties:
+        id:
+          type: number
+          minimum: 10
+        name:
+          type: string
+        gender:
+          type: string
+          enum:
+            - F
+            - M
+        age:
+          type: number
+          minimum: 0
+          maximum: 120
+        accountConfig:
+          $ref: '#/components/schemas/Config'
+      required:
+        - id
+        - name
+        - gender
+        - accountConfig
