@@ -1,28 +1,19 @@
 import { Injectable } from '@nestjs/common';
-
-export interface User {
-  id: number;
-  name: string;
-  gender: 'F' | 'M';
-  age?: number;
-  accountConfig: {
-    isAdmin: boolean;
-  };
-}
+import { CreateUserDto } from './create-user.dto';
 
 @Injectable()
 export class AppService {
-  private userDBmock: User[] = [];
+  private userDBmock: CreateUserDto[] = [];
 
   getHello(): string {
     return 'Hello World!';
   }
 
-  getUsers(): User[] {
+  getUsers(): CreateUserDto[] {
     return this.userDBmock;
   }
 
-  createUser(user: User): User {
+  createUser(user: CreateUserDto): CreateUserDto {
     this.userDBmock.push(user);
     return user;
   }
