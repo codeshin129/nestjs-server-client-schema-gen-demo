@@ -5,6 +5,9 @@ export interface User {
   name: string;
   gender: 'F' | 'M';
   age?: number;
+  accountConfig: {
+    isAdmin: boolean;
+  };
 }
 
 @Injectable()

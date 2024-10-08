@@ -60,7 +60,7 @@ export const Users: React.FC = () => {
               <div> id: {todo.index} </div>
               <div> name: {todo.name} </div>
               <div> gender: {todo.gender} </div>
-              <div> isAdmin: {todo.accountConfig.isAdmin ? "yes" : "no"} </div>
+              <div> isAdmin: {String(todo.accountConfig.isAdmin)} </div>
             </div>
 
             <br />
