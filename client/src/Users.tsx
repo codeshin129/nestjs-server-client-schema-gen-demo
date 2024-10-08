@@ -53,18 +53,15 @@ export const Users: React.FC = () => {
   return (
     <div>
       <ul>
-        {query.data?.map((todo) => (
-          <>
-            <div key={todo.id}>
-              {" "}
-              <div> id: {todo.index} </div>
-              <div> name: {todo.name} </div>
-              <div> gender: {todo.gender} </div>
-              <div> isAdmin: {String(todo.accountConfig.isAdmin)} </div>
-            </div>
-
+        {query.data?.map((user) => (
+          <div key={user.id}>
+            {" "}
+            <div> id: {user.index} </div>
+            <div> name: {user.name} </div>
+            <div> gender: {user.gender} </div>
+            <div> isAdmin: {String(user.accountConfig.isAdmin)} </div>
             <br />
-          </>
+          </div>
         ))}
       </ul>
       <button
@@ -79,7 +76,7 @@ export const Users: React.FC = () => {
           });
         }}
       >
-        Add Todo
+        Add user
       </button>
     </div>
   );
