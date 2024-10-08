@@ -54,7 +54,17 @@ export const Users: React.FC = () => {
     <div>
       <ul>
         {query.data?.map((todo) => (
-          <li key={todo.id}>{todo.name}</li>
+          <>
+            <div key={todo.id}>
+              {" "}
+              <div> id: {todo.index} </div>
+              <div> name: {todo.name} </div>
+              <div> gender: {todo.gender} </div>
+              <div> isAdmin: {todo.accountConfig.isAdmin ? "yes" : "no"} </div>
+            </div>
+
+            <br />
+          </>
         ))}
       </ul>
       <button
