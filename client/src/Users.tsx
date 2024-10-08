@@ -1,6 +1,6 @@
-import './App.css';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { APIClient, CreateUserDto } from './apiClient';
+import "./App.css";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { APIClient, CreateUserDto } from "./apiClient";
 
 function generateRandomTenDigitNumber() {
   // 1000000000 (10桁の最小値) から 9999999999 (10桁の最大値) までのランダムな数値を生成
@@ -12,8 +12,8 @@ function generateRandomTenDigitNumber() {
 function generateRandomFourCharacterString() {
   // 使用する文字のセット
   const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
   const charactersLength = characters.length;
 
   for (let i = 0; i < 4; i++) {
@@ -25,28 +25,28 @@ function generateRandomFourCharacterString() {
 }
 
 const apiClient = async () => {
-  return new APIClient({ BASE: 'http://localhost:3000' }).default;
+  return new APIClient({ BASE: "http://localhost:3000" }).default;
 };
-const userAPI = await apiClient();
+const userAPI = apiClient();
 
 export const Users: React.FC = () => {
   const queryClient = useQueryClient();
   // Queries
 
   const query = useQuery({
-    queryKey: ['users'],
-    queryFn: () => userAPI.appControllerGetUsers(),
+    queryKey: ["users"],
+    queryFn: async () => (await userAPI).appControllerGetUsers(),
   });
 
   // Mutations
   const mutation = useMutation({
-    mutationFn: (user: CreateUserDto) =>
-      userAPI.appControllerCreateUser({
+    mutationFn: async (user: CreateUserDto) =>
+      (await userAPI).appControllerCreateUser({
         requestBody: user,
       }),
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['users'] });
+      queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
 
@@ -62,7 +62,7 @@ export const Users: React.FC = () => {
           mutation.mutate({
             id: generateRandomTenDigitNumber(),
             name: generateRandomFourCharacterString(),
-            gender: 'M',
+            gender: "M",
             accountConfig: {
               isAdmin: true,
             },
